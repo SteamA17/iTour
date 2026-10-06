@@ -6,19 +6,32 @@ import {
 } from "react-native";
 import { StyleSheet } from "react-native";
 
+import BackButton from "./BackButton";
+
 type PropertySetupScreenProps = {
   propertyName: string;
-  onPropertyNameChange: (name: string) => void;
+  onPropertyNameChange: (value: string) => void;
+  error: string;
   onCreateProperty: () => void;
+  onBack: () => void;
 };
 
 export default function PropertySetupScreen({
   propertyName,
   onPropertyNameChange,
+  error,
   onCreateProperty,
+  onBack,
 }: PropertySetupScreenProps) {
   return (
     <View style={styles.container}>
+      <View style={styles.backButtonContainer}>
+        <BackButton
+          onPress={onBack}
+          label="Add Property"
+        />
+      </View>
+
       <Text style={styles.logo}>iTour</Text>
 
       <Text style={styles.title}>
@@ -40,6 +53,18 @@ export default function PropertySetupScreen({
         value={propertyName}
         onChangeText={onPropertyNameChange}
       />
+
+      {error ? (
+        <Text
+          style={{
+            color: "#dc2626",
+            marginTop: 8,
+            marginBottom: 8,
+          }}
+        >
+          {error}
+        </Text>
+      ) : null}
 
       <TouchableOpacity
         style={[
@@ -85,6 +110,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 35,
     lineHeight: 24,
+  },
+
+  backButtonContainer: {
+    position: "absolute",
+    top: 55,
+    left: 20,
   },
 
   inputLabel: {

@@ -6,19 +6,29 @@ import {
 } from "react-native";
 import { StyleSheet } from "react-native";
 
+import BackButton from "./BackButton";
+
 type RoomSetupScreenProps = {
   roomName: string;
   onRoomNameChange: (name: string) => void;
   onStartCapture: () => void;
+  onBack: () => void;
 };
 
 export default function RoomSetupScreen({
   roomName,
   onRoomNameChange,
   onStartCapture,
+  onBack,
 }: RoomSetupScreenProps) {
   return (
     <View style={styles.container}>
+      <View style={styles.backButtonContainer}>
+        <BackButton
+          onPress={onBack}
+          label="Add Room"
+        />
+      </View>
       <Text style={styles.logo}>iTour</Text>
 
       <Text style={styles.title}>
@@ -77,6 +87,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#111",
+  },
+
+  backButtonContainer: {
+    position: "absolute",
+    top: 55,
+    left: 20,
   },
 
   message: {

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import type { Room } from "../types";
+import BackButton from "./BackButton";
 
 type RoomDetailsScreenProps = {
   room: Room;
@@ -25,15 +26,9 @@ export default function RoomDetailsScreen({
       style={styles.container}
       contentContainerStyle={styles.content}
     >
-      <TouchableOpacity onPress={onBack}>
-        <Text style={styles.backButton}>
-          ← Back to Property
-        </Text>
-      </TouchableOpacity>
+      <BackButton onPress={onBack} />
 
-      <Text style={styles.title}>
-        {room.name}
-      </Text>
+      <Text style={styles.title}>{room.name}</Text>
 
       <Text style={styles.subtitle}>
         {room.photos.length} photos captured
@@ -42,10 +37,7 @@ export default function RoomDetailsScreen({
       {/* Photo Gallery */}
       <View style={styles.photoGrid}>
         {room.photos.map((photo, index) => (
-          <View
-            key={index}
-            style={styles.photoContainer}
-          >
+          <View key={index} style={styles.photoContainer}>
             <Image
               source={{ uri: photo }}
               style={styles.thumbnail}
@@ -80,12 +72,6 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 60,
     paddingBottom: 50,
-  },
-
-  backButton: {
-    fontSize: 15,
-    color: "#555",
-    marginBottom: 25,
   },
 
   title: {

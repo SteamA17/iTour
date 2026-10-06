@@ -7,12 +7,15 @@ import {
 } from "react-native";
 import { StyleSheet } from "react-native";
 
+import BackButton from "./BackButton";
+
 type CameraScreenProps = {
   cameraRef: RefObject<CameraView | null>;
   facing: "back" | "front";
   roomName: string;
   photoCount: number;
   onTakePhoto: () => void;
+  onBack: () => void;
 };
 
 export default function CameraScreen({
@@ -21,9 +24,16 @@ export default function CameraScreen({
   roomName,
   photoCount,
   onTakePhoto,
+  onBack,
 }: CameraScreenProps) {
   return (
     <View style={styles.container}>
+      <View style={styles.backButtonContainer}>
+        <BackButton
+          onPress={onBack}
+          label="Room Setup"
+        />
+      </View>
       <CameraView
         ref={cameraRef}
         style={styles.camera}
@@ -104,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   topSection: {
-    paddingTop: 60,
+    paddingTop: 110,
     paddingHorizontal: 24,
     alignItems: "center",
   },
@@ -119,6 +129,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     marginTop: 6,
+  },
+
+  backButtonContainer: {
+    position: "absolute",
+    top: 55,
+    left: 20,
   },
 
   centerGuide: {

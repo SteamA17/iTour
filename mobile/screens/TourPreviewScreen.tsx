@@ -5,7 +5,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 import type { Room } from "../types";
+import BackButton from "./BackButton";
 
 type TourPreviewScreenProps = {
   room: Room;
@@ -32,14 +34,9 @@ export default function TourPreviewScreen({
       />
 
       <View style={styles.overlay}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={onBack}
-        >
-          <Text style={styles.backText}>
-            ← Back
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.top}>
+          <BackButton onPress={onBack} />
+        </View>
 
         <View style={styles.bottom}>
           <Text style={styles.roomName}>
@@ -101,20 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  backButton: {
-    alignSelf: "flex-start",
+  top: {
     marginTop: 55,
     marginLeft: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    backgroundColor: "rgba(0,0,0,0.55)",
-    borderRadius: 10,
-  },
-
-  backText: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "600",
   },
 
   bottom: {

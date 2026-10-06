@@ -7,22 +7,30 @@ import {
   View,
 } from "react-native";
 
+import BackButton from "./BackButton";
+
 type ReviewScreenProps = {
   photos: string[];
   roomName: string;
   onContinue: () => void;
+  onBack: () => void;
 };
 
 export default function ReviewScreen({
   photos,
   roomName,
   onContinue,
+  onBack,
 }: ReviewScreenProps) {
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.content}
     >
+      <View style={styles.backButtonContainer}>
+        <BackButton onPress={onBack} label="Camera" />
+      </View>
+
       <Text style={styles.title}>Review Capture</Text>
 
       <Text style={styles.subtitle}>
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
 
   content: {
     padding: 24,
-    paddingTop: 60,
+    paddingTop: 55,
   },
 
   title: {
@@ -79,6 +87,10 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 24,
     lineHeight: 23,
+  },
+
+  backButtonContainer: {
+    marginBottom: 24,
   },
 
   photoGrid: {
